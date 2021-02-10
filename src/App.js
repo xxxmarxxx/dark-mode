@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
 import data from "./data";
 import Article from "./Article";
-// lesson 204/205/
+// lesson 204/205/206/207
+
+
+const getStorageTheme = () => {
+  let theme = 'light-theme'
+  if(localStorage.getItem('theme')){
+    theme = localStorage.getItem('theme')
+  }
+  return theme
+}
 
 function App() {
-  const [theme, setTheme] = useState("light-theme");
+  const [theme, setTheme] = useState(getStorageTheme);
 
   const toggleTheme = () => {
     if (theme === "light-theme") {
@@ -15,6 +24,7 @@ function App() {
   };
   useEffect(() => {
     document.documentElement.className = theme;
+    localStorage.setItem('theme',theme)
   }, [theme]);
   return (
     <main>
